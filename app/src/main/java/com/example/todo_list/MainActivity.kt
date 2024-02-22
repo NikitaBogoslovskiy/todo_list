@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dataset = arrayOf("January", "February", "March")
+        val dataset = mutableListOf("January", "February", "March")
         val customAdapter = CustomAdapter(dataset)
         val recyclerView: RecyclerView = findViewById(R.id.todo_list_viewer)
         recyclerView.adapter = customAdapter
