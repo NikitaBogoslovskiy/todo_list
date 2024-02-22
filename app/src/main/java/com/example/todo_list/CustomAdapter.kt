@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -24,17 +25,31 @@ class CustomAdapter(private val dataSet: MutableList<String>) :
         }
     }
 
+    var overallItemsNumber = ObservableField(0)
+    var checkedItemsNumber = ObservableField(0)
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item, viewGroup, false)
+        overallItemsNumber.set((overallItemsNumber.get() ?: 0) + 1)
         return ViewHolder(view).apply {
             checkbox.setOnClickListener {
                 text.paintFlags = when (checkbox.isChecked) {
-                    true -> Paint.STRIKE_THRU_TEXT_FLAG
-                    false -> 0
+                    true -> {
+                        checkedItemsNumber.set((checkedItemsNumber.get() ?: 0) + 1)
+                        Paint.STRIKE_THRU_TEXT_FLAG
+                    }
+                    false -> {
+                        checkedItemsNumber.set((checkedItemsNumber.get() ?: 0) - 1)
+                        0
+                    }
                 }
             }
             delete.setOnClickListener {
+                overallItemsNumber.set((overallItemsNumber.get() ?: 0) - 1)
+                if (checkbox.isChecked) {
+                    checkedItemsNumber.set((checkedItemsNumber.get() ?: 0) - 1)
+                }
                 dataSet.removeAt(this.adapterPosition)
                 notifyItemRemoved(this.adapterPosition)
             }
