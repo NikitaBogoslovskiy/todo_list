@@ -25,13 +25,12 @@ class CustomAdapter(private val dataSet: MutableList<String>) :
         }
     }
 
-    var overallItemsNumber = ObservableField(0)
+    var overallItemsNumber = ObservableField(dataSet.size)
     var checkedItemsNumber = ObservableField(0)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item, viewGroup, false)
-        overallItemsNumber.set((overallItemsNumber.get() ?: 0) + 1)
         return ViewHolder(view).apply {
             checkbox.setOnClickListener {
                 text.paintFlags = when (checkbox.isChecked) {

@@ -11,7 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dataset = mutableListOf("Buy some milk", "Do homework", "Help parents with cooking")
+        val dataset = mutableListOf("Buy some milk", "Do homework", "Help parents with cooking",
+            "Buy some milk", "Do homework", "Help parents with cooking",
+            "Buy some milk", "Do homework", "Help parents with cooking",
+            "Buy some milk", "Do homework", "Help parents with cooking")
         val customAdapter = CustomAdapter(dataset)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_main)
