@@ -14,5 +14,9 @@
         android:id="@+id/itemsList"
         android:name="com.example.todo_list.ItemsList"
         android:label="fragment_items_list"
-        tools:layout="@layout/fragment_items_list" />
+        tools:layout="@layout/fragment_items_list" >
+        <action
+            android:id="@+id/action_itemsList_to_itemDetails"
+            app:destination="@id/itemDetails" />
+    </fragment>
 </navigation>

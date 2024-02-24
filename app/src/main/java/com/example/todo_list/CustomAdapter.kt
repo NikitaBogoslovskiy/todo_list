@@ -8,12 +8,21 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.ObservableField
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 
 
-class CustomAdapter(private val dataSet: MutableList<String>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+interface ItemListener {
+    fun onItemClick()
+}
 
+class CustomAdapter(private val dataSet: MutableList<String>,
+                    private val listener: ItemListener) :
+    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val text: TextView
         val checkbox: CheckBox
@@ -25,6 +34,8 @@ class CustomAdapter(private val dataSet: MutableList<String>) :
         }
     }
 
+    lateinit var manager: FragmentManager
+    lateinit var navController: NavController
     var overallItemsNumber = ObservableField(dataSet.size)
     var checkedItemsNumber = ObservableField(0)
 
@@ -51,6 +62,10 @@ class CustomAdapter(private val dataSet: MutableList<String>) :
                 }
                 dataSet.removeAt(this.adapterPosition)
                 notifyItemRemoved(this.adapterPosition)
+            }
+
+            itemView.setOnClickListener {
+                listener.onItemClick()
             }
         }
     }
