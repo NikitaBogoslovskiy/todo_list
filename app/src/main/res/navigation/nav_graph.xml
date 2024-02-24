@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/itemsList">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.todo_list.MainActivity"
-        android:label="MainActivity" />
     <fragment
         android:id="@+id/itemDetails"
         android:name="com.example.todo_list.ItemDetails"
         android:label="fragment_item_details"
         tools:layout="@layout/fragment_item_details" />
+    <fragment
+        android:id="@+id/itemsList"
+        android:name="com.example.todo_list.ItemsList"
+        android:label="fragment_items_list"
+        tools:layout="@layout/fragment_items_list" />
 </navigation>
