@@ -15,15 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.databinding.FragmentItemDetailsBinding
 import com.example.todo_list.databinding.FragmentItemsListBinding
 
+data class ItemInfo(var title: String, var date: String, var time: String, var details: String)
+
 class ItemsList : Fragment() {
     private lateinit var binding: FragmentItemsListBinding
     private lateinit var recyclerView: RecyclerView
-    private var dataset = mutableListOf("Buy some milk", "Do homework", "Help parents with cooking")
-    private val customAdapter = CustomAdapter(dataset, object : ItemListener {
-        override fun onItemClick() {
-            navigateToFragment()
-        }
-    })
+    private var dataset = mutableListOf(ItemInfo("Buy some milk", "4.04.2023", "16:30", "Milk should be fresh"))
+    private val customAdapter = CustomAdapter(dataset)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +36,5 @@ class ItemsList : Fragment() {
         binding.adapter = customAdapter
         recyclerView = view.findViewById(R.id.todo_list_viewer)
         recyclerView.adapter = customAdapter
-        customAdapter.manager = parentFragmentManager
-    }
-
-    private fun navigateToFragment() {
-        findNavController().navigate(R.id.action_itemsList_to_itemDetails, null)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.todo_list
 
 import android.graphics.Paint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,25 +9,22 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.ObservableField
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_list.*
 
 
 interface ItemListener {
     fun onItemClick()
 }
 
-class CustomAdapter(private val dataSet: MutableList<String>,
-                    private val listener: ItemListener) :
+class CustomAdapter(private val dataSet: MutableList<ItemInfo>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val text: TextView
         val checkbox: CheckBox
         val delete: ImageButton
+        lateinit var item: ItemInfo
         init {
             text = view.findViewById(R.id.item_text)
             checkbox = view.findViewById(R.id.item_is_finished)
@@ -34,8 +32,6 @@ class CustomAdapter(private val dataSet: MutableList<String>,
         }
     }
 
-    lateinit var manager: FragmentManager
-    lateinit var navController: NavController
     var overallItemsNumber = ObservableField(dataSet.size)
     var checkedItemsNumber = ObservableField(0)
 
@@ -64,14 +60,20 @@ class CustomAdapter(private val dataSet: MutableList<String>,
                 notifyItemRemoved(this.adapterPosition)
             }
 
-            itemView.setOnClickListener {
-                listener.onItemClick()
+            text.setOnClickListener {
+                val args = Bundle()
+                args.putString(ARG_TITLE, item.title)
+                args.putString(ARG_DATE, item.date)
+                args.putString(ARG_TIME, item.time)
+                args.putString(ARG_DETAILS, item.details)
+                it.findNavController().navigate(R.id.action_itemsList_to_itemDetails, args)
             }
         }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.text.text = dataSet[position]
+        viewHolder.item = dataSet[position]
+        viewHolder.text.text = viewHolder.item.title
     }
 
     override fun getItemCount() = dataSet.size
