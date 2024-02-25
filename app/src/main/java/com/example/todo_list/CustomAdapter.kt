@@ -60,7 +60,7 @@ class CustomAdapter(private val dataSet: MutableList<ItemInfo>) :
                 notifyItemRemoved(this.adapterPosition)
             }
 
-            text.setOnClickListener {
+            itemView.setOnClickListener {
                 val args = Bundle()
                 args.putString(ARG_TITLE, item.title)
                 args.putString(ARG_DATE, item.date)

@@ -2,10 +2,6 @@ package com.example.todo_list
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.NavHostFragment
-import com.example.todo_list.databinding.ActivityMainBinding
-import com.example.todo_list.databinding.FragmentItemDetailsBinding
 
 
 class MainActivity : AppCompatActivity() {

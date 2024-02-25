@@ -37,20 +37,7 @@
             app:layout_constraintTop_toTopOf="@+id/top_bar"
             app:layout_constraintVertical_bias="0.5"
             app:tint="@color/white"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck,TouchTargetSizeCheck" />
-
-        <!--        <TextView
-            android:id="@+id/item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="Item title"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_title_icon"
-            app:layout_constraintTop_toBottomOf="@id/top_bar"
-            app:layout_constraintVertical_bias="0.048" />-->
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
         <ImageButton
             android:id="@+id/item_title_icon"
@@ -73,24 +60,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:editable="false"
-            android:inputType="none"
-            android:autofillHints=""
             android:ems="8"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:gravity="top|start"
-            android:text=""
+            android:text="@string/default_title"
             android:textColor="@color/black"
-            android:textIsSelectable="false"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_title_icon"
             app:layout_constraintTop_toBottomOf="@id/top_bar"
-            app:layout_constraintVertical_bias="0.045"
-            tools:ignore="Deprecated,LabelFor,SpeakableTextPresentCheck" />
+            app:layout_constraintVertical_bias="0.045" />
 
         <ImageButton
             android:id="@+id/item_date_icon"
@@ -108,18 +86,20 @@
             app:tint="@color/black"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-        <TextView
+        <EditText
             android:id="@+id/item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text=""
+            android:layout_marginStart="28dp"
+            android:ems="10"
+            android:inputType="date"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:text="@string/default_date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_title_icon"
             app:layout_constraintTop_toBottomOf="@id/item_title"
-            app:layout_constraintVertical_bias="0.038" />
+            app:layout_constraintVertical_bias="0.023" />
 
         <ImageButton
             android:id="@+id/item_time_icon"
@@ -137,18 +117,20 @@
             app:tint="@color/black"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-        <TextView
+        <EditText
             android:id="@+id/item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text=""
+            android:layout_marginStart="28dp"
+            android:ems="10"
+            android:inputType="time"
+            android:text="@string/default_time"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_time_icon"
             app:layout_constraintTop_toBottomOf="@id/item_date"
-            app:layout_constraintVertical_bias="0.061" />
+            app:layout_constraintVertical_bias="0.044" />
 
         <ImageButton
             android:id="@+id/item_details_icon"
@@ -171,24 +153,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:editable="false"
             android:ems="12"
-            android:inputType="none"
-            android:autofillHints=""
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:gravity="top|start"
-            android:text=""
+            android:gravity="start|top"
+            android:text="@string/default_details"
             android:textColor="@color/black"
-            android:textIsSelectable="false"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_details_icon"
             app:layout_constraintTop_toBottomOf="@id/item_time"
-            app:layout_constraintVertical_bias="0.077"
-            tools:ignore="Deprecated,LabelFor,SpeakableTextPresentCheck" />
+            app:layout_constraintVertical_bias="0.074"  />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            android:text="@string/submit_button_text"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:backgroundTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

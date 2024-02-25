@@ -34,7 +34,7 @@
             android:id="@+id/item_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/element_text"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,8 +46,8 @@
 
         <ImageButton
             android:id="@+id/delete_item_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@color/transparent"
             android:src="@android:drawable/ic_menu_delete"
             app:tint="@color/black"

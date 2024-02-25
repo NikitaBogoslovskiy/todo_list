@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.navigation.findNavController
 
 const val ARG_TITLE = "title"
 const val ARG_DATE = "date"
@@ -26,7 +29,6 @@ class ItemDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_item_details, container, false)
     }
 
@@ -38,25 +40,8 @@ class ItemDetails : Fragment() {
             view.findViewById<TextView>(R.id.item_time).text = it.getString(ARG_TIME)
             view.findViewById<TextView>(R.id.item_details).text = it.getString(ARG_DETAILS)
         }
+        view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
+            it.findNavController().navigateUp()
+        }
     }
-
-/*    companion object {
-        *//**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ItemDetails.
-         *//*
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ItemDetails().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }*/
 }
