@@ -41,7 +41,7 @@ class ItemDetails : Fragment() {
             view.findViewById<TextView>(R.id.item_details).text = it.getString(ARG_DETAILS)
         }
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
-            it.findNavController().navigateUp()
+            it.findNavController().navigate(R.id.action_itemDetails_to_itemsList)
         }
     }
 }

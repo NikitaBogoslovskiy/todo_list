@@ -23,7 +23,7 @@ class NewItem : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
-            it.findNavController().navigateUp()
+            it.findNavController().navigate(R.id.action_newItem_to_itemsList)
         }
 
         view.findViewById<Button>(R.id.submit_button).setOnClickListener {
