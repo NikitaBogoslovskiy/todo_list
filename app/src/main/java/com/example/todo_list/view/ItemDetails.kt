@@ -1,14 +1,14 @@
-package com.example.todo_list
+package com.example.todo_list.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.navigation.findNavController
+import com.example.todo_list.R
 
 const val ARG_TITLE = "title"
 const val ARG_DATE = "date"
@@ -21,10 +21,6 @@ const val ARG_DETAILS = "details"
  * create an instance of this fragment.
  */
 class ItemDetails : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,13 +31,14 @@ class ItemDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            view.findViewById<TextView>(R.id.item_title).text = it.getString(ARG_TITLE)
-            view.findViewById<TextView>(R.id.item_date).text = it.getString(ARG_DATE)
-            view.findViewById<TextView>(R.id.item_time).text = it.getString(ARG_TIME)
-            view.findViewById<TextView>(R.id.item_details).text = it.getString(ARG_DETAILS)
+            val item = Dependencies.viewModel.getById(it.getLong("id"))
+            view.findViewById<TextView>(R.id.item_title).text = item.title
+            view.findViewById<TextView>(R.id.item_date).text = item.date
+            view.findViewById<TextView>(R.id.item_time).text = item.time
+            view.findViewById<TextView>(R.id.item_details).text = item.details
         }
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
-            it.findNavController().navigate(R.id.action_itemDetails_to_itemsList)
+            it.findNavController().navigateUp()
         }
     }
 }

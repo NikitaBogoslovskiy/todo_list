@@ -5,7 +5,7 @@
     android:id="@+id/fragment_items_list">
 
     <data>
-        <variable name="adapter" type="com.example.todo_list.CustomAdapter"/>
+        <variable name="adapter" type="com.example.todo_list.view.CustomAdapter"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

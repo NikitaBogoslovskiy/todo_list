@@ -1,4 +1,4 @@
-package com.example.todo_list
+package com.example.todo_list.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.navigation.findNavController
+import com.example.todo_list.R
+import com.example.todo_list.viewmodel.Item
 
 
 class NewItem : Fragment() {
@@ -23,11 +25,20 @@ class NewItem : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
-            it.findNavController().navigate(R.id.action_newItem_to_itemsList)
+            it.findNavController().navigateUp()
         }
 
         view.findViewById<Button>(R.id.submit_button).setOnClickListener {
-            it.findNavController().navigate(R.id.action_newItem_to_itemsList)
+            val newItem = Item(
+                0,
+                false,
+                view.findViewById<TextView>(R.id.item_title).text.toString(),
+                view.findViewById<TextView>(R.id.item_date).text.toString(),
+                view.findViewById<TextView>(R.id.item_time).text.toString(),
+                view.findViewById<TextView>(R.id.item_details).text.toString()
+            )
+            Dependencies.viewModel.insertNew(newItem)
+            it.findNavController().navigateUp()
         }
     }
 }
