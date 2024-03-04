@@ -1,25 +1,21 @@
-package com.example.todo_list
+package com.example.todo_list.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.navigation.findNavController
+import com.example.todo_list.R
 
 const val ARG_TITLE = "title"
 const val ARG_DATE = "date"
 const val ARG_TIME = "time"
 const val ARG_DETAILS = "details"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ItemDetails.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ItemDetails : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +37,7 @@ class ItemDetails : Fragment() {
             view.findViewById<TextView>(R.id.item_details).text = it.getString(ARG_DETAILS)
         }
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
-            it.findNavController().navigate(R.id.action_itemDetails_to_itemsList)
+            it.findNavController().navigateUp()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.todo_list
+package com.example.todo_list.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_list.presenter.ItemsViewAdapter
+import com.example.todo_list.R
 import com.example.todo_list.databinding.FragmentItemsListBinding
 
 data class ItemInfo(var title: String, var date: String, var time: String, var details: String)
@@ -30,7 +32,7 @@ class ItemsList : Fragment() {
             "You have to wake up early and watch cartoon... Ha, the joke! The first of April today."
         )
     )
-    private var customAdapter = CustomAdapter(dataset)
+    private var itemsViewAdapter = ItemsViewAdapter(dataset)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +44,9 @@ class ItemsList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.adapter = customAdapter
+        binding.adapter = itemsViewAdapter
         recyclerView = view.findViewById(R.id.todo_list_viewer)
-        recyclerView.adapter = customAdapter
+        recyclerView.adapter = itemsViewAdapter
 
         view.findViewById<Button>(R.id.add_button).setOnClickListener {
             it.findNavController().navigate(R.id.action_itemsList_to_newItem)

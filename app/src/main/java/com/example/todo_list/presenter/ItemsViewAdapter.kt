@@ -1,4 +1,4 @@
-package com.example.todo_list
+package com.example.todo_list.presenter
 
 import android.graphics.Paint
 import android.os.Bundle
@@ -11,16 +11,16 @@ import android.widget.TextView
 import androidx.databinding.ObservableField
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.*
+import com.example.todo_list.R
+import com.example.todo_list.view.fragments.ARG_DATE
+import com.example.todo_list.view.fragments.ARG_DETAILS
+import com.example.todo_list.view.fragments.ARG_TIME
+import com.example.todo_list.view.fragments.ARG_TITLE
+import com.example.todo_list.view.fragments.ItemInfo
 
-
-interface ItemListener {
-    fun onItemClick()
-}
-
-class CustomAdapter(private val dataSet: MutableList<ItemInfo>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ItemsViewAdapter(private val dataSet: MutableList<ItemInfo>) :
+    RecyclerView.Adapter<ItemsViewAdapter.ItemViewHolder>() {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val text: TextView
         val checkbox: CheckBox
         val delete: ImageButton
@@ -35,10 +35,10 @@ class CustomAdapter(private val dataSet: MutableList<ItemInfo>) :
     var overallItemsNumber = ObservableField(dataSet.size)
     var checkedItemsNumber = ObservableField(0)
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item, viewGroup, false)
-        return ViewHolder(view).apply {
+        return ItemViewHolder(view).apply {
             checkbox.setOnClickListener {
                 text.paintFlags = when (checkbox.isChecked) {
                     true -> {
@@ -71,9 +71,9 @@ class CustomAdapter(private val dataSet: MutableList<ItemInfo>) :
         }
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.item = dataSet[position]
-        viewHolder.text.text = viewHolder.item.title
+    override fun onBindViewHolder(itemViewHolder: ItemViewHolder, position: Int) {
+        itemViewHolder.item = dataSet[position]
+        itemViewHolder.text.text = itemViewHolder.item.title
     }
 
     override fun getItemCount() = dataSet.size

@@ -7,16 +7,12 @@
 
     <fragment
         android:id="@+id/itemDetails"
-        android:name="com.example.todo_list.ItemDetails"
+        android:name="com.example.todo_list.view.fragments.ItemDetails"
         android:label="fragment_item_details"
-        tools:layout="@layout/fragment_item_details" >
-        <action
-            android:id="@+id/action_itemDetails_to_itemsList"
-            app:destination="@id/itemsList" />
-    </fragment>
+        tools:layout="@layout/fragment_item_details" />
     <fragment
         android:id="@+id/itemsList"
-        android:name="com.example.todo_list.ItemsList"
+        android:name="com.example.todo_list.view.fragments.ItemsList"
         android:label="fragment_items_list"
         tools:layout="@layout/fragment_items_list" >
         <action
@@ -28,11 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/newItem"
-        android:name="com.example.todo_list.NewItem"
+        android:name="com.example.todo_list.view.fragments.ItemNewFragment"
         android:label="fragment_new_item"
-        tools:layout="@layout/fragment_new_item" >
-        <action
-            android:id="@+id/action_newItem_to_itemsList"
-            app:destination="@id/itemsList" />
-    </fragment>
+        tools:layout="@layout/fragment_item_new" />
 </navigation>
