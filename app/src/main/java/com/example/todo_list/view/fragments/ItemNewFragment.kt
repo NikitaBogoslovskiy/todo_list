@@ -35,7 +35,7 @@ class ItemNewFragment : Fragment() {
             val time = view.findViewById<TextView>(R.id.item_time).text.toString()
             val details = view.findViewById<TextView>(R.id.item_details).text.toString()
             val item = Item(0, false, title, date, time, details)
-            Dependencies.appViewModel.insert(item)
+            Dependencies.itemsAppViewModel.insert(item)
             it.findNavController().navigateUp()
         }
     }

@@ -14,25 +14,23 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 
 
-class ItemsViewAdapter(var items: MutableList<Item>) :
+class ItemsViewAdapter(private var items: MutableList<Item>) :
     RecyclerView.Adapter<ItemViewHolder>() {
-
-    var overallItemsNumber = ObservableField(0)
-    var checkedItemsNumber = ObservableField(0)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item, viewGroup, false)
         val viewHolder = ItemViewHolder(view)
-/*        viewHolder.addCheckboxClickListener(this)
+        viewHolder.addCheckboxClickListener(this)
         viewHolder.addDeleteClickListener(this)
-        viewHolder.addTextClickListener(this)*/
+        viewHolder.addTextClickListener()
         return viewHolder
     }
 
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         viewHolder.checkbox.isChecked = items[position].isDone
         viewHolder.text.text = items[position].title
+        viewHolder.text.paintFlags = Utils.getTextStyle(items[position].isDone)
         viewHolder.id = items[position].id
     }
 
@@ -40,6 +38,7 @@ class ItemsViewAdapter(var items: MutableList<Item>) :
 
     @SuppressLint("NotifyDataSetChanged")
     fun update() {
+
         notifyDataSetChanged()
     }
 }

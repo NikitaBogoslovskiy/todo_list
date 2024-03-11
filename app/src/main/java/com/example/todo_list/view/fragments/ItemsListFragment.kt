@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.Dependencies
 import com.example.todo_list.R
 import com.example.todo_list.databinding.FragmentItemsListBinding
-import com.example.todo_list.viewmodel.AppViewModel
 
 data class ItemInfo(var title: String, var date: String, var time: String, var details: String)
 
@@ -29,9 +28,9 @@ class ItemsList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.adapter = Dependencies.appViewModel.itemsViewAdapter
+        binding.repository = Dependencies.itemsAppViewModel.repository
         recyclerView = view.findViewById(R.id.todo_list_viewer)
-        recyclerView.adapter = Dependencies.appViewModel.itemsViewAdapter
+        recyclerView.adapter = Dependencies.itemsAppViewModel.itemsViewAdapter
 
         view.findViewById<Button>(R.id.add_button).setOnClickListener {
             it.findNavController().navigate(R.id.action_itemsList_to_newItem)

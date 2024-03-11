@@ -1,5 +1,6 @@
 package com.example.todo_list.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todo_list.Dependencies
@@ -11,26 +12,38 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AppViewModel : ViewModel() {
+class ItemsAppViewModel : ViewModel() {
     var itemsViewAdapter: ItemsViewAdapter
-    private val repository: ItemsRepository
+    val repository: ItemsRepository
 
     init {
         val itemsDao = ItemsAppDatabase.getDatabase(Dependencies.applicationContext).getItemsDao()
         repository = ItemsRepository(itemsDao)
         itemsViewAdapter = ItemsViewAdapter(repository.items)
-        updateUI()
-    }
-
-    private fun updateUI() = viewModelScope.launch {
-            repository.update()
-            itemsViewAdapter.update()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.load()
+            }
+        }
     }
 
     fun insert(item: Item) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             repository.insert(item)
         }
-        updateUI()
+    }
+
+    fun get(id: Long) = repository.get(id)
+
+    fun delete(id: Long) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.delete(id)
+        }
+    }
+
+    fun changeStatus(id: Long, status: Boolean) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.changeStatus(id, status)
+        }
     }
 }
